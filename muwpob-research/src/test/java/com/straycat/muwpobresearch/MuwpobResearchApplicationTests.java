@@ -8,6 +8,7 @@ class MuwpobResearchApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("Hello Spring");
     }
 
 }
