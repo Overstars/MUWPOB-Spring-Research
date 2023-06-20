@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LogFilter {
-    private static final Logger logger = LoggerFactory.getLogger(LogFilter.class);
+    private  Logger logger = LoggerFactory.getLogger(getClass());
 
     protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
         HttpServletRequest request = servletRequest;
