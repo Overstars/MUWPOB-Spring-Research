@@ -13,6 +13,9 @@ public class TransService {
 
         return responseMap;
     }
-
+    /*
+     * http://api.fanyi.baidu.com/api/trans/vip/translate
+     * https://blog.csdn.net/qq_51235856/article/details/131147340
+     */
 
 }
