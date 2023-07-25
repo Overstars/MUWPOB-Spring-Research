@@ -8,6 +8,7 @@
 1. 接入[百度翻译接口](http://api.fanyi.baidu.com/doc/21)作为请求实验，可以用postman验证。
 2. 写组装报文的服务类，和发送接收报文的服务类。
 3. 对请求和返回的报文进行wsdl和xsd校验。
+4. 添加对properties进行读取的api
 
 ### 依赖
 

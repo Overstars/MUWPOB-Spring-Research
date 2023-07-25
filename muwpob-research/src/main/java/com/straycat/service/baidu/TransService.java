@@ -14,8 +14,8 @@ public class TransService {
         return responseMap;
     }
     /*
-     * http://api.fanyi.baidu.com/api/trans/vip/translate
      * https://blog.csdn.net/qq_51235856/article/details/131147340
+     * http://api.fanyi.baidu.com/api/trans/vip/translate?q=apple&from=en&to=zh&appid=20210417000785945&salt=1435660288&sign=93d6f86e5a9017b236ec22ff4749deeb
      */
 
 }

@@ -29,12 +29,11 @@ public class MD5Util {
         try {
             return encodeHex(MessageDigest.getInstance("MD5").digest(source));
         } catch (NoSuchAlgorithmException e) {
-//            logger.error("encode()加密失败", e);
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
     /**
-     * @description: 
+     * @description: byte串转16进制String
      * @param bytes: 
      * @return java.lang.String
      * @author: Overstars
@@ -53,6 +52,6 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        logger.debug(encrypt("123456"));
+        logger.debug(encrypt("20210417000785945apple1435660288UVUMbcvaGHQL0PdWiVHs"));
     }
 }
