@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -81,10 +82,9 @@ public class HttpUtils {
     public static String sendPost(String url, String param, Map<String, String> header) throws IOException {
         PrintWriter out = null;
         BufferedReader in = null;
-        String result = "";
         URL realUrl = new URL(url);
         // 打开和URL之间的连接
-        URLConnection connection = realUrl.openConnection();
+        HttpURLConnection connection = (HttpURLConnection)realUrl.openConnection();
         //设置超时时间
         connection.setConnectTimeout(30000);
         connection.setReadTimeout(50000);
@@ -108,12 +108,18 @@ public class HttpUtils {
         out.print(param);
         // flush输出流的缓冲
         out.flush();
-        // 定义BufferedReader输入流来读取URL的响应
-        in = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
-        String line;
-        while ((line = in.readLine()) != null) {
-            result += line;
+        final StringBuffer rspBuffer = new StringBuffer();
+        if (connection.getResponseCode() == 200) {
+            // 定义BufferedReader输入流来读取URL的响应
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
+            String line;
+            while ((line = in.readLine()) != null) {
+                rspBuffer.append(line);
+            }
+        } else {
+            throw new RuntimeException("请求失败 状态码: " + connection.getResponseCode());
         }
+        String result = rspBuffer.toString();
         out.close();
         in.close();
         return result;
