@@ -51,4 +51,3 @@ java {
 ```
 
 @SpringBootApplication注解的文件要扔到其他代码的上级或者同级，否则可能会无法成功运行。
-
