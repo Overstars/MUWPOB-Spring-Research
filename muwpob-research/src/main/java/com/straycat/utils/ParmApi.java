@@ -19,8 +19,41 @@ public class ParmApi {
         FileInputStream fio = null;
         try {
             fio = new FileInputStream(properPath);
-        } catch () {
-            
+            props.load(fio);
+            for (Object propKey : props.keySet()) {
+                String key = (String) propKey;
+                String value = props.getProperty(key);
+                parmMap.put(key, value);
+            }
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            if (fio != null) {
+                try {
+                    fio.close();
+                } catch (Exception e) {
+                    logger.info(e.getMessage());
+                }
+            }
         }
+    }
+    /**
+     * @description: 
+     * @param parmKey: 
+     * @return java.lang.String
+     * @author: Overstars
+     * @date: 2023/7/29 17:52
+     */
+    public static String getParameter(String parmKey) {
+        if (parmKey != null || parmKey.isEmpty()) {
+            init();
+        }
+        return parmMap.get(parmKey);
+    }
+    public String getFileName() {
+        return fileName;
+    }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
