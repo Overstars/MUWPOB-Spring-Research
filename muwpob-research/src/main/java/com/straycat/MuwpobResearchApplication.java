@@ -1,5 +1,6 @@
 package com.straycat;
 
+import com.straycat.utils.ParmApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,8 @@ public class MuwpobResearchApplication {
         Boolean flag2 = map.get("list1") instanceof List;
         logger.info(flag1.toString());
         logger.info(flag2.toString());
+//        String log = ParmApi.getParameter("description");
+//        logger.info("description = " + log);
         SpringApplication.run(MuwpobResearchApplication.class, args);
     }
 }

@@ -7,10 +7,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HttpUtils {
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
@@ -25,14 +28,14 @@ public class HttpUtils {
      * */
     /**
      * @description: 向指定url发送get请求的方法
-     * @param url: 
-     * @param param:
-     * @param header:
+     * @param url: url前缀，通信协议+主机+端口号+路径
+     * @param param: 拼接好的参数查询
+     * @param header: 键值对，进行参数设定
      * @return java.lang.String
      * @author: Overstars
      * @date: 2023/7/25 21:53
      */
-    public static String sendGet(String url, Map<String, Object> param, Map<String, String> header)  throws IOException {
+    public static String sendGet(String url, String param, Map<String, String> header)  throws IOException {
         String result = "";
         BufferedReader in = null;
         String urlNameString = url + "?" + param;
@@ -43,7 +46,7 @@ public class HttpUtils {
         connection.setConnectTimeout(5000);
         connection.setReadTimeout(14000);
         // 设置通用的请求属性
-        if (header != null) {
+        if (header != null && !header.isEmpty()) {
             for (Map.Entry<String, String> entry : header.entrySet()) {
                 logger.info("header -> {} : {}" , entry.getKey(), entry.getValue());
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
@@ -68,7 +71,7 @@ public class HttpUtils {
             result += line;
         }
         in.close();
-        return result;
+        return unicodeDecode(result);
     }
     /**
      * @description: 向指定url发送post请求的方法
@@ -89,7 +92,7 @@ public class HttpUtils {
         connection.setConnectTimeout(30000);
         connection.setReadTimeout(50000);
         // 设置通用的请求属性
-        if (header!=null) {
+        if (header != null && !header.isEmpty()) {
             Iterator<Map.Entry<String, String>> it = header.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<String, String> entry = it.next();
@@ -119,9 +122,38 @@ public class HttpUtils {
         } else {
             throw new RuntimeException("请求失败 状态码: " + connection.getResponseCode());
         }
-        String result = rspBuffer.toString();
+        String result = URLDecoder.decode (rspBuffer.toString(), "UTF-8");
         out.close();
         in.close();
-        return result;
+        return unicodeDecode(result);
+    }
+    public static String unicodeEncode(String string) {
+        char[] utfBytes = string.toCharArray();
+        String unicodeBytes = "";
+        for (int i = 0; i < utfBytes.length; i++) {
+            String hexB = Integer.toHexString(utfBytes[i]);
+            if (hexB.length() <= 2) {
+                hexB = "00" + hexB;
+            }
+            unicodeBytes = unicodeBytes + "\\u" + hexB;
+        }
+        return unicodeBytes;
+    }
+    public static String unicodeDecode(String string) {
+        Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+        Matcher matcher = pattern.matcher(string);
+        char ch;
+        while (matcher.find()) {
+            ch = (char) Integer.parseInt(matcher.group(2), 16);
+            string = string.replace(matcher.group(1), ch + "");
+        }
+        return string;
+    }
+    public static void main(String[] args) {
+        try {
+            logger.debug("返回报文:{}", sendGet("http://api.fanyi.baidu.com/api/trans/vip/translate", "q=apple&from=en&to=zh&appid=20210417000785945&salt=1435660288&sign=93d6f86e5a9017b236ec22ff4749deeb", null));
+        } catch (Exception e) {
+            logger.info("通信异常", e.getMessage());
+        }
     }
 }

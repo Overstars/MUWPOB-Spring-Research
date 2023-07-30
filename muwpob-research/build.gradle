@@ -27,3 +27,22 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// 添加自定义源文件目录，没什么用
+sourceSets {
+    main {
+        java.srcDirs += ['src/main/com/config']
+    }
+}
+
+// 打印源文件目录信息
+task printSourceSetInformation(){
+    doLast{
+        sourceSets.each { srcSet ->
+            println "["+srcSet.name+"]"
+            print "-->Source directories: "+srcSet.allJava.srcDirs+"\n"
+            print "-->Output directories: "+srcSet.output.classesDirs.files+"\n"
+            println ""
+        }
+    }
+}

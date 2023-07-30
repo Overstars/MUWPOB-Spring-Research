@@ -14,7 +14,16 @@ public class ParmApi {
     static String fileName;
 
     public static void init() {
-        String properPath = Thread.currentThread().getContextClassLoader().getResource("/config/" + fileName).getPath();
+        logger.info(Thread.currentThread()
+                .getContextClassLoader().getResource("").toString());
+        logger.info(Thread.currentThread()
+                .getClass()
+                .getClassLoader()
+                .toString());
+        String properPath = Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("/config/" + fileName)
+                .getPath();
         Properties props = new Properties();
         FileInputStream fio = null;
         try {
