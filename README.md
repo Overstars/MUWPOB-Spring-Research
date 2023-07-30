@@ -18,6 +18,7 @@
 | java           | openjdk-11.0.2_windows-x64_bin                               |                                                              |          |
 | gradle         | gradle-6.9.3                                                 |                                                              |          |
 | 消息队列中间件 | RocketMQ：5.0.0                                              | https://rocketmq.apache.org/zh/download                      | 待研究   |
+| DAO            | mybatis：1.3.1                                               | https://mybatis.org/mybatis-3/zh/getting-started.html        |          |
 | 数据库         | mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb    | https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb | TODO     |
 | 自动化运维     | Ansible：2.14.1                                              |                                                              | 可能会用 |
 |                |                                                              |                                                              |          |
