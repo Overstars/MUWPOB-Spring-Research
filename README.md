@@ -69,3 +69,6 @@ java {
 |      |              |      |                              |                                                              |
 |      |              |      |                              |                                                              |
 
+### 函数注释生成
+
+[IDEA中设置给每个方法加上注释的快捷键](https://blog.csdn.net/weixin_45089791/article/details/103722702)
