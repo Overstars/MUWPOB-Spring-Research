@@ -18,10 +18,10 @@ public class DateTimeUtils {
     static String dateTimeFormat[] = {
             "uuuu-MM-dd'T'HH:mm:ss.SSSSSS",
             "uuuu-MM-dd'T'HH:mm:ss.SSS",
-            "yyyy-MM-dd'T'HH:mm:ss.SSS",
-            "yyyy-MM-dd HH:mm:ss.SSS",
             "yyyy-MM-dd'T'HH:mm:ss",
+            "yyyy-MM-dd HH:mm:ss.SSS",
             "yyyy-MM-dd HH:mm:ss",
+            "yyyy年-M月-d日 HH:mm:ss.SSS",
             "yyyy年-M月-d日 HH:mm:ss",
             "yyyy年-M月-d日 HH时mm分ss秒"
     };
