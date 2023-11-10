@@ -61,12 +61,19 @@ public class DateTimeUtils {
         return result;
     }
     public static LocalDateTime parseBest(String dateStr) {
+        if (dateStr == null) {
+            throw new NullPointerException("dateStr参数不能为null");
+        };
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy hh:mm:ss");
         TemporalAccessor ta = formatter.parseBest(dateStr, TemporalQueries.localDate(), TemporalQueries.localTime());
         return LocalDateTime.from(ta);
     }
     /**
-     * 获取某个月的实际最大天数, 如2016-02, 最大天数为29
+     * @description: 获取某个月的实际最大天数, 如2016-02, 最大天数为29
+     * @param date:
+     * @return: int
+     * @author: Overstars
+     * @date: 2023/11/10 9:51
      */
     public static int getMaximum(Date date) {
         Calendar c = Calendar.getInstance();
@@ -84,10 +91,10 @@ public class DateTimeUtils {
                     "2023年-2月-28日 23时59分59秒"
                 };
             for (String s : query) {
-                System.out.println(s + "转换格式为ISO-8601格式 -> " + parseDateTimeFromStr(s).toString());
+                logger.info(s + "转换格式为ISO-8601格式 -> " + parseDateTimeFromStr(s).toString());
             }
         } catch (Exception e) {
-            logger.info("Date解析异常", e.getMessage());
+            logger.info("Date解析异常：{}", e.getMessage());
         }
     }
 }
