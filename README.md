@@ -19,7 +19,7 @@
 | gradle         | gradle-6.9.3                                                 |                                                              |          |
 | 消息队列中间件 | RocketMQ：5.0.0                                              | https://rocketmq.apache.org/zh/download                      | 待研究   |
 | DAO            | mybatis：1.3.1                                               | https://mybatis.org/mybatis-3/zh/getting-started.html        |          |
-| 数据库         | mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb    | https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb | TODO     |
+| 数据库         | mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb<br>psql (PostgreSQL) 12.16 (Ubuntu 12.16-0ubuntu0.20.04.1) | https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-core_8.0.32-1ubuntu22.04_amd64.deb | TODO     |
 | 自动化运维     | Ansible：2.14.1                                              |                                                              | 可能会用 |
 |                |                                                              |                                                              |          |
 
@@ -31,7 +31,7 @@
 |      |      |      |
 |      |      |      |
 
-
+## 项目配置IDEA
 
 ### build.gradle参数更改
 
@@ -64,7 +64,7 @@ java {
 | 名称 | 示例         |      | 产生原因                     | 解决方式                                                     |
 | ---- | ------------ | ---- | ---------------------------- | ------------------------------------------------------------ |
 |      | \u82f9\u679c |      | 使用ASCII编码读取unicode编码 | 通过工具函数将unicode转换为汉字                              |
-|      | ���ر���      |      | UTF-8读取GB2312格式的编码    | 如果是idea的终端里的建议在idea64.exe.vmoptions加-Dfile.encoding=UTF-8 |
+|      | ���ر���      |      | UTF-8读取GB2312格式的编码    | 如果是idea的终端里的建议在idea64.exe.vmoptions加-Dfile.encoding=UTF-8<br>启动参数虚拟机参数添加-Dfile.encoding=UTF-8 |
 |      |              |      |                              |                                                              |
 |      |              |      |                              |                                                              |
 |      |              |      |                              |                                                              |
@@ -72,3 +72,35 @@ java {
 ### 函数注释生成
 
 [IDEA中设置给每个方法加上注释的快捷键](https://blog.csdn.net/weixin_45089791/article/details/103722702)
+
+
+
+## 数据库PostgreSQL
+
+```
+# 修改postgresql.conf文件
+vim /etc/postgresql/12/main/postgresql.conf
+# 修改pg_hba.conf文件
+vim /etc/postgresql/12/main/pg_hba.conf
+#重启服务
+/etc/init.d/postgresql restart
+
+# 查看数据库状态
+sudo /etc/init.d/postgresql status
+# 启动数据库
+sudo /etc/init.d/postgresql start
+# 停止数据库
+sudo /etc/init.d/postgresql stop
+# 重启数据库
+sudo /etc/init.d/postgresql restart
+# 完全卸载postgresql数据库
+sudo service postgresql stop 
+sudo apt-get --purge remove postgresql\* 
+# 删除相关配置文件
+sudo rm -r /etc/postgresql/
+sudo rm -r /etc/postgresql-common/
+sudo rm -r /var/lib/postgresql/
+sudo userdel -r postgres
+sudo groupdel postgres
+```
+
