@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloAction {
-    private static HelloService helloService = new HelloService();
+    private HelloService helloService = new HelloService();
     private static Logger logger = LoggerFactory.getLogger(HelloAction.class);
     @GetMapping("hello")
     public String hello() {

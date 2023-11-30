@@ -49,6 +49,17 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
+// 构建的时候添加到启动前任务中
+task copyResources(type: Copy) {
+    from 'src/main/resources'
+    into 'build/classes/java/main'
+}
+// 添加自定义源文件目录，没什么用
+sourceSets {
+    main {
+        java.srcDirs += ['src/main/resources']
+    }
+}
 ```
 
 @SpringBootApplication注解的文件要扔到其他代码的上级或者同级，否则可能会无法成功运行。
@@ -56,6 +67,14 @@ java {
 ### 关于Gradle构建时将config打包至指定位置
 
 [Gradle构建jar包，将文件打包到lib目录外方便读取和下载](https://blog.csdn.net/w4187402/article/details/107060463)，不一定可行，可能是gradle版本问题。
+
+### JVM参数
+
+```
+-Dspring.profiles.active=main -Dserver.port=8081 -verbose:gc -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError
+```
+
+
 
 ### 常见中文乱码解析
 

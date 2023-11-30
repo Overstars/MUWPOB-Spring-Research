@@ -29,10 +29,15 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+task copyResources(type: Copy) {
+    from 'src/main/resources'
+    into 'build/classes/java/main'
+}
+
 // 添加自定义源文件目录，没什么用
 sourceSets {
     main {
-        java.srcDirs += ['src/main/com/config']
+        java.srcDirs += ['src/main/resources']
     }
 }
 

@@ -24,7 +24,7 @@ public class ContextParmInterceptor implements HandlerInterceptor {
         String methodName = method.getName();
         logger.info("====拦截到了方法：{}，在该方法执行之前执行====", methodName);
         LocalDate date = LocalDate.now(); // get the current date
-        String traceNo = "12345" + date.format(DateTimeFormatter.BASIC_ISO_DATE);
+        String traceNo = "10000" + date.format(DateTimeFormatter.BASIC_ISO_DATE);
         logger.info("====交易流水：{}====", traceNo);
         // 返回true才会继续执行，返回false则取消当前请求
         return true;
