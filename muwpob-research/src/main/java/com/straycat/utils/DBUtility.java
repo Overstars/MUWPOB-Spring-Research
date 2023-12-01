@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class DBUtility {
     private static final Logger logger = LoggerFactory.getLogger(DBUtility.class);
-    private static final String DB_URL = "jdbc:postgresql://43.138.55.7:5432/postgres";
-    private static final String USER = "postgres";
+    private static final String DB_URL = ParmApi.getParameter("postgresURL");
+    private static final String USER = ParmApi.getParameter("postgresUser");
     private static final String PASS = ParmApi.getParameter("postgresPasswd");
     private static String msgCode = "0004OB9002";
 

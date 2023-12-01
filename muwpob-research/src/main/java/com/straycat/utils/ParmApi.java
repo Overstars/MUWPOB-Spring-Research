@@ -12,6 +12,13 @@ public class ParmApi {
     protected static final Logger logger = LoggerFactory.getLogger("ParmApi");
     protected static Map<String, String> parmMap = new HashMap<>();
     static String fileName = "application.properties";
+    /**
+     * @description: 在首次调用getParameter时将properties读取到内存中
+     * @param :
+     * @return: void
+     * @author: Overstars
+     * @date: 2023/12/1 11:04
+     */
 
     public static void init() {
         logger.info(Thread.currentThread()
@@ -50,8 +57,8 @@ public class ParmApi {
         }
     }
     /**
-     * @description: 
-     * @param parmKey: 
+     * @description:
+     * @param parmKey: 要从properties里加载的key值
      * @return java.lang.String
      * @author: Overstars
      * @date: 2023/7/29 17:52
