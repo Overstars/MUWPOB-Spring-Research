@@ -82,8 +82,8 @@ public class TraceNoGenerator {
 
         // 组合生成唯一ID
         return ((timestamp << TIMESTAMP_SHIFT) |
-                (datacenterId << DATACENTER_ID_SHIFT) |
-                (workerId << WORKER_ID_SHIFT) |
+                (datacenterId << DATACENTER_ID_SHIFT)) |
+                ((workerId << WORKER_ID_SHIFT) |
                 sequence);
     }
     private long getCurrentTimestamp() {
@@ -125,7 +125,7 @@ public class TraceNoGenerator {
         for (int i = 0; i < 10; i++) {
             new Thread(()->{
                 long uniqueId = idGenerator.generateUniqueId();
-                logger.info("Generated Unique ID : {}", padLeftZeros(Long.toBinaryString(uniqueId), 64));
+                logger.info("Generated Unique ID : {}, {}", uniqueId, padLeftZeros(Long.toBinaryString(uniqueId), 64));
             }).start();
         }
     }

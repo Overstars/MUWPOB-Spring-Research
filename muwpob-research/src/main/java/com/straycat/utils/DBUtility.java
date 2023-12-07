@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class DBUtility {
     private static final Logger logger = LoggerFactory.getLogger(DBUtility.class);
-    private static final String DB_URL = ParmApi.getParameter("postgresURL");
-    private static final String USER = ParmApi.getParameter("postgresUser");
-    private static final String PASS = ParmApi.getParameter("postgresPasswd");
+    private static final String DB_URL = ParmApi.getParameter("datasource.postgres.url");
+    private static final String USER = ParmApi.getParameter("datasource.postgres.user");
+    private static final String PASS = ParmApi.getParameter("datasource.postgres.password");
     private static String msgCode = "0004OB9002";
 
     public static Map<String, Object> query(Context context) {
